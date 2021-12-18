@@ -15,13 +15,10 @@ namespace MyFirstProgram
         }
         static void Main(string[] args)
         {
-            string[] things = { "apple", "banana", "carrot" };
-            float comfort = WeatherUtilities.ComfortIndex(50, 50); // don't need WeatherUtilities then
+            Console.WriteLine("Where should we go in May?");
+            WeatherUtilities.Report("San Francisco", WeatherUtilities.FahrenheitToCelsius(65), 73);
+            WeatherUtilities.Report("Denver", WeatherUtilities.FahrenheitToCelsius(77), 55);
             WeatherUtilities.Report("Bologna", 23, 65);
-            Console.WriteLine(comfort);
-            // Console.WriteLine(things[0]);
-            float temp = WeatherUtilities.FahrenheitToCelsius(60);
-            Console.WriteLine(temp);
         }
     }
 }

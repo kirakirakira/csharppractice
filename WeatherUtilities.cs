@@ -7,10 +7,10 @@ namespace MyUtilities
         public static float FahrenheitToCelsius(float temperatureFahrenheit)
         {
             Console.WriteLine("inside the weather class");
-            return temperatureFahrenheit - 32 / 1.8f;
+            return (temperatureFahrenheit - 32) / 1.8f;
         }
 
-        static float CelsiusToFahrenheit(float temperatureCelsius)
+        public static float CelsiusToFahrenheit(float temperatureCelsius)
         {
             return temperatureCelsius * 1.8f + 32;
         }
