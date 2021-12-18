@@ -4,26 +4,25 @@ namespace MyUtilities
 {
     public class WeatherUtilities // class needs to be public
     {
-        static float FahrenheitToCelsius(float temperatureFahrenheit)
+        public static float FahrenheitToCelsius(float temperatureFahrenheit)
         {
-            var temperatureCelsius = temperatureFahrenheit - 32 / 1.8f;
-            return temperatureCelsius;
+            Console.WriteLine("inside the weather class");
+            return temperatureFahrenheit - 32 / 1.8f;
         }
 
         static float CelsiusToFahrenheit(float temperatureCelsius)
         {
-            var temperatureFahrenheit = temperatureCelsius * 1.8f + 32;
-            return temperatureFahrenheit;
+            return temperatureCelsius * 1.8f + 32;
         }
 
         // method needs to be public and static
         public static float ComfortIndex(float temperatureFahrenheit, float humidityPercent)
         {
-            var comfortIndex = (temperatureFahrenheit + humidityPercent) / 4;
-            return comfortIndex; // lower the index, the more comfortable
+            // lower the index, the more comfortable
+            return (temperatureFahrenheit + humidityPercent) / 4;
         }
 
-        static void Report(string location, float temperatureCelsius, float humidity)
+        public static void Report(string location, float temperatureCelsius, float humidity)
         {
             var temperatureFahrenheit = CelsiusToFahrenheit(temperatureCelsius);
             Console.WriteLine("Comfort Index for " + location + ": " + ComfortIndex(temperatureFahrenheit, humidity));
