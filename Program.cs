@@ -3,6 +3,7 @@
 // using static MyUtilities.WeatherUtilities; // another way to do this with C# 6
 using MyUtilities;
 using WiredBrainCoffeeSurveys.Reports;
+using Newtonsoft.Json;
 
 namespace MyFirstProgram
 {
@@ -72,6 +73,27 @@ namespace MyFirstProgram
             WeatherUtilities.Report("Bologna", 23, 65);
 
         }
+
+        public static void GenerateWinnerEmails(SurveyResults results)
+        {
+            var selectedEmails = new List<string>();
+            int counter = 0;
+
+            while (selectedEmails.Count < 2 && counter < results.Responses.Count)
+            {
+                var currentItem = results.Responses[counter];
+
+                if (currentItem.FavoriteProduct == "Cappuccino")
+                {
+                    selectedEmails.Add(currentItem.EmailAddress);
+                    Console.WriteLine(currentItem.EmailAddress);
+                }
+
+                counter++;
+            }
+
+            File.WriteAllLines("WinnersReport.csv", selectedEmails);
+        }
         private static float FahrenheitToCelsius(float temperatureFahreinheit)
         {
             var temperatureCelsius = (temperatureFahreinheit - 32) / 1.8f;
@@ -80,8 +102,48 @@ namespace MyFirstProgram
         }
         static void Main(string[] args)
         {
-            GenerateWeatherReport();
-            GenerateTasksReport();
+            bool quitApp = false;
+
+            do
+            {
+                Console.WriteLine("Please pick report to run (tasks, weather, winners):");
+                var selectedReport = Console.ReadLine();
+
+                Console.WriteLine("Please specify which quarter of data: (q1, q2)");
+                var selectedData = Console.ReadLine();
+
+                var surveyResults = JsonConvert.DeserializeObject<SurveyResults>
+                    (File.ReadAllText($"data/{selectedData}.json"));
+
+                // Console.WriteLine(surveyResults.Responses[0].Comments);
+
+                switch (selectedReport)
+                {
+                    case "tasks":
+                        GenerateTasksReport();
+                        break;
+
+                    case "weather":
+                        GenerateWeatherReport();
+                        break;
+
+                    case "winners":
+                        GenerateWinnerEmails(surveyResults);
+                        break;
+
+                    case "quit":
+                        quitApp = true;
+                        break;
+
+                    default:
+                        Console.WriteLine("Sorry, choose a valid option");
+                        break;
+                }
+
+                Console.WriteLine();
+            }
+            while (!quitApp);
+
 
             for (var i = 0; i < Q1Results.Responses.Count; i++)
             {
@@ -90,6 +152,14 @@ namespace MyFirstProgram
                 if (currentResponse.CoffeeScore < 7.0)
                 {
                     Console.WriteLine(currentResponse.EmailAddress);
+                }
+            }
+
+            foreach (var response in Q1Results.Responses)
+            {
+                if (response.FoodScore == Q1Results.FoodScore)
+                {
+                    Console.WriteLine("bingo!");
                 }
             }
         }

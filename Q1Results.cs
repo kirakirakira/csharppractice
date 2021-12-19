@@ -35,7 +35,8 @@ namespace WiredBrainCoffeeSurveys.Reports
                 EmailAddress = "hi@gmail.com",
                 CoffeeScore = 8.0,
                 FoodScore = 8.2,
-                PriceScore = 2
+                PriceScore = 2,
+                FavoriteProduct = "Cappuccino"
             },
             new SurveyResponse()
             {
@@ -48,7 +49,7 @@ namespace WiredBrainCoffeeSurveys.Reports
             {
                 EmailAddress = "hi3@gmail.com",
                 CoffeeScore = 6.0,
-                FoodScore = 8.2,
+                FoodScore = 7.5,
                 PriceScore = 21
             },
             new SurveyResponse()
