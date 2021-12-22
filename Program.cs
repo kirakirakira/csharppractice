@@ -4,6 +4,7 @@
 using MyUtilities;
 using WiredBrainCoffeeSurveys.Reports;
 using Newtonsoft.Json;
+using NetCoreAudio;
 
 namespace MyFirstProgram
 {
@@ -117,6 +118,8 @@ namespace MyFirstProgram
 
                 // Console.WriteLine(surveyResults.Responses[0].Comments);
 
+                var player = new Player();
+
                 switch (selectedReport)
                 {
                     case "tasks":
@@ -129,6 +132,10 @@ namespace MyFirstProgram
 
                     case "winners":
                         GenerateWinnerEmails(surveyResults);
+                        break;
+
+                    case "music":
+                        player.Play("burp_x.wav");
                         break;
 
                     case "quit":
