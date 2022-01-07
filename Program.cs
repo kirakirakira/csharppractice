@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace BethanysPieShopHRM
 {
-    enum EmployeeType
+    public enum EmployeeType
     {
         Sales,
         Manager,
@@ -24,6 +24,18 @@ namespace BethanysPieShopHRM
     {
         static void Main(string[] args)
         {
+            Employee bethany = new Employee(
+                "Bethany",
+                "Woody",
+                "wb@gmail.com",
+                new DateTime(1990, 1, 22),
+                25.45);
+
+            bethany.DisplayEmployeeDetails();
+            bethany.PerformWork();
+            bethany.StopWorking();
+            bethany.ReceiveWage();
+
             CalculateWage(340, EmployeeType.Sales, StoreType.Pie);
 
             Console.ReadLine();

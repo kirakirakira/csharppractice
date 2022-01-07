@@ -14,9 +14,24 @@ namespace BethanysPieShopHRM
         public int numberOfHoursWorked;
         public double wage;
         public double hourlyRate;
-        public DateTime birthDay;
+        public DateTime birthday;
 
         public EmployeeType employeeType;
+
+        public Employee(
+            string firstName,
+            string lastName,
+            string email,
+            DateTime birthday,
+            double hourlyRate)
+        {
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.email = email;
+            this.birthday = birthday;
+            this.hourlyRate = hourlyRate;
+        }
+        /// <summary>method <c>PerformWork</c> increases number of hours worked by 1</summary>
         public void PerformWork()
         {
             numberOfHoursWorked++;
@@ -41,7 +56,7 @@ namespace BethanysPieShopHRM
 
         public void DisplayEmployeeDetails()
         {
-            Console.WriteLine($"\nFirst name: {firstName}\nLast name: {lastName}\nEmail: {email}\nBirthday: {birthDay.ToShortDateString()}\nEmployee type: {employeeType}\n");
+            Console.WriteLine($"\nFirst name: {firstName}\nLast name: {lastName}\nEmail: {email}\nBirthday: {birthday.ToShortDateString()}\nEmployee type: {employeeType}\n");
         }
     }
 }
