@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace BethanysPieShopHRM.HR
 {
-    public class Employee
+    //public class Employee
+    public abstract class Employee
     {
         private string firstName;
         private string lastName;
@@ -13,12 +13,8 @@ namespace BethanysPieShopHRM.HR
         private double wage;
         private double? hourlyRate;
         public static double taxRate = 0.15;
-        public static double bonusRate = 0.02;
 
         private DateTime birthDay;
-        private EmployeeType employeeType;
-
-        private const double maxAmountHoursWorked = 1000;//
 
         public string FirstName
         {
@@ -28,7 +24,6 @@ namespace BethanysPieShopHRM.HR
                 firstName = value;
             }
         }
-
         public string LastName
         {
             get { return lastName; }
@@ -77,24 +72,14 @@ namespace BethanysPieShopHRM.HR
                 birthDay = value;
             }
         }
-        public EmployeeType EmployeeType
-        {
-            get { return employeeType; }
-            set
-            {
-                employeeType = value;
-            }
-        }
 
-        public Employee(string first, string last, string em, DateTime bd, EmployeeType empType, double? rate)
+        public Employee(string first, string last, string em, DateTime bd, double? rate)
         {
             FirstName = first;
             LastName = last;
             Email = em;
             BirthDay = bd;
-            EmployeeType = empType;
             HourlyRate = rate ?? 10;
-            //maxAmountHoursWorked = 100;//not allowed
         }
 
         public void PerformWork()
@@ -104,40 +89,40 @@ namespace BethanysPieShopHRM.HR
             Console.WriteLine($"{FirstName} {LastName} is now working!");
         }
 
+
         public void StopWorking()
         {
             Console.WriteLine($"{FirstName} {LastName} has stopped working!");
         }
 
-        public double ReceiveWage()
+        public abstract double ReceiveWage();
+
+        //public double ReceiveWage()
+        //{
+        //    double wageBeforeTax = NumberOfHoursWorked * HourlyRate.Value;
+        //    double taxAmount = wageBeforeTax * taxRate;
+
+        //    Wage = wageBeforeTax - taxAmount;
+
+        //    Console.WriteLine($"The wage for {NumberOfHoursWorked} hours of work is {Wage}.");
+        //    NumberOfHoursWorked = 0;
+
+        //    return Wage;
+        //}
+
+        public virtual void GiveBonus()
         {
-            double wageBeforeTax = NumberOfHoursWorked * HourlyRate.Value;
-            double taxAmount = wageBeforeTax * taxRate;
-
-            Wage = wageBeforeTax - taxAmount;
-
-            Console.WriteLine($"The wage for {NumberOfHoursWorked} hours of work is {Wage}.");
-            NumberOfHoursWorked = 0;
-
-            return Wage;
+            Console.WriteLine($"{FirstName} {LastName} received a generic bonus of 100!");
         }
 
         public void DisplayEmployeeDetails()
         {
-            Console.WriteLine($"\nFirst name: {FirstName}\nLast name: {LastName}\nEmail: {Email}\nBirthday: {BirthDay.ToShortDateString()}\nEmployee type: {EmployeeType}\nTax rate: {taxRate}");
+            Console.WriteLine($"\nFirst name: {FirstName}\nLast name: {LastName}\nEmail: {Email}\nBirthday: {BirthDay.ToShortDateString()}\nTax rate: {taxRate}");
         }
 
         public static void DisplayTaxRate()
         {
             Console.WriteLine($"The current tax rate is {taxRate}");
         }
-    }
-
-    public enum EmployeeType
-    {
-        Sales,
-        Manager,
-        Research,
-        StoreManager
     }
 }

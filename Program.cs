@@ -1,99 +1,54 @@
-﻿using BethanysPieShopHRM.Accounting;
-using BethanysPieShopHRM.HR;
+﻿using BethanysPieShopHRM.HR;
 using System;
-using System.Collections.Generic;
 
 namespace BethanysPieShopHRM
 {
     class Program
     {
-        public static List<Employee> employees = new List<Employee>();
-
-        public static void DisplayAllEmployees()
-        {
-            foreach (Employee employee in employees)
-            {
-                employee.DisplayEmployeeDetails();
-            }
-        }
         static void Main(string[] args)
         {
-            Console.WriteLine("Creating an employee");
-            Console.WriteLine("--------------------\n");
+            //Employee bethany = new Employee("Bethany", "Smith", "bethany@snowball.be", new DateTime(1979, 1, 16), 25);
+            //Manager mary = new Manager("Mary", "Jones", "mary@snowball.be", new DateTime(1965, 1, 16), 30);
+            //JuniorResearcher bobJunior = new JuniorResearcher("Bob", "Spencer", "bob@snowball.be", new DateTime(1988, 1, 23), 17);
+            //Employee kevin = new Employee("Kevin", "Marks", "kevin@snowball.be", new DateTime(1953, 12, 12), 10);
+            //Employee kate = new Employee("Kate", "Greggs", "kate@snowball.be", new DateTime(1993, 8, 8), 10);
 
-            //Employee bethany = new Employee("Bethany", "Smith", "bethany@snowball.be", new DateTime(1979, 1, 16), EmployeeType.Manager, 25);
-            Employee bethany = new Employee("Bethany", "Smith", "bethany@snowball.be", new DateTime(1979, 1, 16), EmployeeType.Manager, null);
-            Employee george = new Employee("George", "Jones", "george@snowball.be", new DateTime(1984, 3, 28), EmployeeType.Research, 30);
+            Employee bethany = new StoreManager("Bethany", "Smith", "bethany@snowball.be", new DateTime(1979, 1, 16), 25);
+            Manager mary = new Manager("Mary", "Jones", "mary@snowball.be", new DateTime(1965, 1, 16), 30);
+            // JuniorResearcher bobJunior = new JuniorResearcher("Bob", "Spencer", "bob@snowball.be", new DateTime(1988, 1, 23), 17);
+            // Employee kevin = new StoreManager("Kevin", "Marks", "kevin@snowball.be", new DateTime(1953, 12, 12), 10);
+            // Employee kate = new StoreManager("Kate", "Greggs", "kate@snowball.be", new DateTime(1993, 8, 8), 10);
 
-            employees.Add(bethany);
-            employees.Add(george);
-
-            //Employee mysteryPerson = null;
-            //mysteryPerson.DisplayEmployeeDetails();
-
-            Customer customer = new Customer();
-
-            #region First run Bethany
-
+            bethany.DisplayEmployeeDetails();
             bethany.PerformWork();
             bethany.PerformWork();
             bethany.PerformWork();
             bethany.ReceiveWage();
-            bethany.DisplayEmployeeDetails();
 
-            #endregion
+            mary.DisplayEmployeeDetails();
+            mary.PerformWork();
+            mary.PerformWork();
+            mary.PerformWork();
+            mary.AttendManagementMeeting();
+            mary.ReceiveWage();
 
+            // bobJunior.ResearchNewPieTastes(5);
+            // bobJunior.ReceiveWage();
 
-            #region First run George
+            Employee[] employees = new Employee[5];
+            employees[0] = bethany;
+            employees[1] = mary;
+            // employees[2] = bobJunior;
+            // employees[3] = kevin;
+            // employees[4] = kate;
 
-            george.PerformWork();
-            george.PerformWork();
-            george.PerformWork();
-            george.ReceiveWage();
-            george.DisplayEmployeeDetails();
-
-            #endregion
-
-            Employee.taxRate = 0.05;//woohoo, less money to pay
-            #region Second run Bethany
-
-            bethany.PerformWork();
-            bethany.PerformWork();
-            bethany.PerformWork();
-            bethany.PerformWork();
-            bethany.PerformWork();
-            bethany.PerformWork();
-            bethany.ReceiveWage();
-            bethany.DisplayEmployeeDetails();
-
-            #endregion
-
-            #region Second run George
-
-            george.PerformWork();
-            george.PerformWork();
-            george.PerformWork();
-            george.ReceiveWage();
-            george.DisplayEmployeeDetails();
-
-            #endregion
-
-
-            Employee.DisplayTaxRate();
-
-            Console.WriteLine("===========");
-            DisplayAllEmployees();
-            List<Employee> employees2 = new List<Employee>();
-            for (int i = 0; i < 10000000; i++)
+            foreach (var employee in employees)
             {
-                Employee randomEmployee = new Employee(Guid.NewGuid().ToString(), Guid.NewGuid().ToString(), Guid.NewGuid().ToString(), new DateTime(1979, 1, 16), EmployeeType.StoreManager, null);
-                employees2.Add(randomEmployee);
+                employee?.PerformWork();
+                employee?.ReceiveWage();
+                employee?.DisplayEmployeeDetails();
+                employee?.GiveBonus();
             }
-
-            employees2.Clear();
-            employees2 = null;
-
-            // GC.Collect();
 
             Console.ReadLine();
         }
