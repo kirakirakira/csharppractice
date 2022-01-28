@@ -6,15 +6,14 @@ namespace Pluralsight.ArraysCollections.Demos
 {
     class Program
     {
-        public static void FindBusTo(BusRoute[] routes, string location, ref BusRoute foundRoute)
+        public static void FindBusesTo(BusRoute[] routes, string location, ref BusRoute[] foundRoutes)
         {
             try
             {
-                BusRoute route = Array.Find(routes,
+                BusRoute[] returnedRoutes = Array.FindAll(routes,
                     route => route.Origin == location || route.Destination == location);
-                Console.WriteLine(route);
 
-                foundRoute = route;
+                foundRoutes = returnedRoutes;
             }
             catch (NullReferenceException e)
             {
@@ -46,15 +45,17 @@ namespace Pluralsight.ArraysCollections.Demos
             routes[0] = route40;
             routes[1] = route42;
             routes[2] = new BusRoute(100, "Kira", "Bob");
+            routes[3] = new BusRoute(120, "Bob", "Kira");
 
             // foreach (BusRoute route in routes)
             //     Console.WriteLine(route);
 
-            BusRoute foundRoute = new BusRoute(5, "Ryan", "Emma");
-            FindBusTo(routes, "Kira", ref foundRoute);
+            BusRoute[] foundRoutes = new BusRoute[4];
+            FindBusesTo(routes, "Kira", ref foundRoutes);
 
-            if (foundRoute != null)
-                Console.WriteLine(foundRoute);
+            if (foundRoutes != null)
+                foreach (BusRoute route in foundRoutes)
+                    Console.WriteLine(route);
             else
                 Console.WriteLine("No routes");
 
