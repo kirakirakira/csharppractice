@@ -24,14 +24,35 @@ namespace Pluralsight.ArraysCollections.Demos
         }
         static void Main(string[] args)
         {
-            List<BusRoute> routes = BusRouteRepository.InitializeRoutes();
-            foreach (BusRoute route in routes)
-                Console.WriteLine(route);
+            var routes = BusRouteRepository.InitializeRoutes();
 
-            routes.RemoveAll(route => route.Origin.StartsWith("Test "));
-
-            foreach (BusRoute route in routes)
+            foreach (BusRoute route in routes.Values)
+            {
                 Console.WriteLine(route);
+            }
+            // BusRoute foundRoute = routes[40];
+            // Console.WriteLine(foundRoute);
+
+            // int number = 25;
+
+            // // bool success = routes.TryGetValue(number, out BusRoute? answer);
+            // bool success = routes.ContainsKey(number);
+
+            // if (success)
+            // {
+            //     Console.WriteLine($"The route you asked for is {routes[number]}");
+            // }
+            // else
+            // {
+            //     Console.WriteLine($"There is no route with number {number}");
+            // }
+            // foreach (BusRoute route in routes)
+            //     Console.WriteLine(route);
+
+            // routes.RemoveAll(route => route.Origin.StartsWith("Test "));
+
+            // foreach (BusRoute route in routes)
+            //     Console.WriteLine(route);
 
 
             // BusRoute[] foundRoutes = new BusRoute[5];
