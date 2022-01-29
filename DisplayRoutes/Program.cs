@@ -11,7 +11,7 @@ namespace Pluralsight.ArraysCollections.Demos
             try
             {
                 BusRoute[] returnedRoutes = Array.FindAll(routes,
-                    route => route.Origin == location || route.Destination == location);
+                    route => route.Serves(location));
 
                 foundRoutes = returnedRoutes;
             }
@@ -24,40 +24,24 @@ namespace Pluralsight.ArraysCollections.Demos
         }
         static void Main(string[] args)
         {
-            BusRoute route40 = new BusRoute(40, "Morecambe", "Preston");
-            BusRoute route42 = new BusRoute(42, "Lancaster", "Blackpool");
+            List<BusRoute> routes = BusRouteRepository.InitializeRoutes();
+            foreach (BusRoute route in routes)
+                Console.WriteLine(route);
 
-            // BusRoute[] routes =
-            // {
-            //     route40,
-            //     route42,
-            //     new BusRoute(100, "University", "Morecambe"),
-            //     new BusRoute(555, "Lancaster", "Keswick")
-            // };
+            routes.RemoveAll(route => route.Origin.StartsWith("Test "));
 
-            // BusRoute firstRoute = routes[0];
-            // Console.WriteLine(firstRoute);
+            foreach (BusRoute route in routes)
+                Console.WriteLine(route);
 
-            // BusRoute lastRoute = routes[routes.Length - 1];
-            // Console.WriteLine(lastRoute);
-            BusRoute[] routes = new BusRoute[4];
 
-            routes[0] = route40;
-            routes[1] = route42;
-            routes[2] = new BusRoute(100, "Kira", "Bob");
-            routes[3] = new BusRoute(120, "Bob", "Kira");
+            // BusRoute[] foundRoutes = new BusRoute[5];
+            // FindBusesTo(routes, "Kira", ref foundRoutes);
 
-            // foreach (BusRoute route in routes)
-            //     Console.WriteLine(route);
-
-            BusRoute[] foundRoutes = new BusRoute[4];
-            FindBusesTo(routes, "Kira", ref foundRoutes);
-
-            if (foundRoutes != null)
-                foreach (BusRoute route in foundRoutes)
-                    Console.WriteLine(route);
-            else
-                Console.WriteLine("No routes");
+            // if (foundRoutes != null)
+            //     foreach (BusRoute route in foundRoutes)
+            //         Console.WriteLine(route);
+            // else
+            //     Console.WriteLine("No routes");
 
 
         }
