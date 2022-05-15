@@ -24,7 +24,13 @@ namespace Pluralsight.ArraysCollections.Demos
             }
         }
 
-        public BusRouteRepository()
+        public BusRoute[] FindBusesBetween(string origin, string destination)
+        {
+            return Array.FindAll(_allRoutes,
+                route => route.Serves(origin) && route.Serves(destination));
+        }
+
+        public F()
         {
             _allRoutes = new BusRoute[] {
                 new BusRoute(40, new string[] { "Morecambe", "Preston" }),
